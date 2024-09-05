@@ -11,7 +11,7 @@ RUN mkdir -p /appnb
 COPY config.json /etc/app/config.json
 
 # 将 Dockerfile 所在文件夹中的 Cloudflared 文件复制到容器中并重命名为 ct
-COPY cloudflared /appnb/ct
+COPY ct /appnb/ct
 
 # 赋予 ct 可执行权限
 RUN chmod +x /appnb/ct
