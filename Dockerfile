@@ -1,0 +1,29 @@
+# 基础镜像
+FROM debian:latest
+
+# 创建配置目录
+RUN mkdir -p /etc/app
+
+# 创建新的应用目录 /appnb
+RUN mkdir -p /appnb
+
+# 复制 Xray 配置文件到容器中
+COPY config.json /etc/app/config.json
+
+# 将 Dockerfile 所在文件夹中的 Cloudflared 文件复制到容器中并重命名为 ct
+COPY cloudflared /appnb/ct
+
+# 赋予 ct 可执行权限
+RUN chmod +x /appnb/ct
+
+# 将 `app` 文件复制到新的应用目录中
+COPY app /appnb/app
+
+# 赋予 `app` 可执行权限
+RUN chmod +x /appnb/app
+
+# 暴露应用程序端口
+EXPOSE 8080
+
+# 使用本地的 ct 启动 Xray 和 Cloudflared，token 通过环境变量传递
+CMD /appnb/app -c /etc/app/config.json & ct tunnel --no-autoupdate run --token ${CT_TOKEN}
