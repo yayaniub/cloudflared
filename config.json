@@ -2,95 +2,52 @@
     "log": {
         "loglevel": "none"
     },
-    "inbounds": [
-        {
-            "port": 80,
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",
-                        "flow": "xtls-rprx-vision"
-                    }
-                ],
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "dest": 3001
-                    },
-                    {
-                        "path": "/trojan",
-                        "dest": 3002
-                    },
-                    {
-                        "path": "/vmess",
-                        "dest": 3003
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp"
-            }
-        },
-        {
-            "port": 3001,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none"
-            }
-        },
-        {
-            "port": 3002,
-            "listen": "127.0.0.1",
-            "protocol": "trojan",
-            "settings": {
-                "clients": [
-                    {
-                        "password": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "path": "/trojan"
-                }
-            }
-        },
-        {
-            "port": 3003,
-            "listen": "127.0.0.1",
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "path": "/vmess"
-                }
-            }
+  "inbounds": [
+    {
+      "port": 80,  // VLESS 端口
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",  // 替换为你的 UUID
+            "level": 0,
+            "email": "your-email@example.com"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/"  // 这里是 VLESS WebSocket 的路径
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom"
+      }
+    },
+    {
+      "port": 81,  // VMess 端口，可以设置为其他端口
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",  // 使用相同或不同的 UUID
+            "alterId": 0,
+            "level": 0,
+            "email": "your-email@example.com"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/"  // 这里是 VMess WebSocket 的路径
         }
-    ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
 }
