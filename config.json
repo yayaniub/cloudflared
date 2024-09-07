@@ -4,12 +4,12 @@
     },
   "inbounds": [
     {
-      "port": 80,  // VLESS 端口
+      "port": 80,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",  // 替换为你的 UUID
+            "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",
             "level": 0,
             "email": "your-email@example.com"
           }
@@ -19,17 +19,17 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/"  // 这里是 VLESS WebSocket 的路径
+          "path": "/"
         }
       }
     },
     {
-      "port": 81,  // VMess 端口，可以设置为其他端口
+      "port": 81,
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",  // 使用相同或不同的 UUID
+            "id": "cb2ef9cb-fc3a-4f42-a206-0a59919a38d6",
             "alterId": 0,
             "level": 0,
             "email": "your-email@example.com"
@@ -39,7 +39,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/"  // 这里是 VMess WebSocket 的路径
+          "path": "/"
         }
       }
     }
